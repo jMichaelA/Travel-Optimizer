@@ -1,6 +1,6 @@
 ﻿namespace TravelOpt
 {
-    partial class Observer
+    partial class Home
     {
         /// <summary>
         /// Required designer variable.
@@ -28,18 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Observer));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.airportLbl = new System.Windows.Forms.Label();
             this.airportCombo = new System.Windows.Forms.ComboBox();
             this.trainLbl = new System.Windows.Forms.Label();
             this.trainCombo = new System.Windows.Forms.ComboBox();
             this.airportGrp = new System.Windows.Forms.GroupBox();
+            this.maxCostInput = new System.Windows.Forms.TextBox();
+            this.maxCostLbl = new System.Windows.Forms.Label();
             this.trainGrp = new System.Windows.Forms.GroupBox();
             this.departureDate = new System.Windows.Forms.DateTimePicker();
             this.returnDate = new System.Windows.Forms.DateTimePicker();
             this.informationGrp = new System.Windows.Forms.GroupBox();
-            this.departureLbl = new System.Windows.Forms.Label();
             this.returnDateLbl = new System.Windows.Forms.Label();
+            this.departureLbl = new System.Windows.Forms.Label();
+            this.travelBtn = new System.Windows.Forms.Button();
             this.airportGrp.SuspendLayout();
             this.trainGrp.SuspendLayout();
             this.informationGrp.SuspendLayout();
@@ -63,6 +66,7 @@
             this.airportCombo.Name = "airportCombo";
             this.airportCombo.Size = new System.Drawing.Size(245, 24);
             this.airportCombo.TabIndex = 2;
+            this.airportCombo.SelectedIndexChanged += new System.EventHandler(this.airportCombo_SelectedIndexChanged);
             // 
             // trainLbl
             // 
@@ -82,18 +86,40 @@
             this.trainCombo.Name = "trainCombo";
             this.trainCombo.Size = new System.Drawing.Size(286, 24);
             this.trainCombo.TabIndex = 4;
+            this.trainCombo.SelectedIndexChanged += new System.EventHandler(this.trainCombo_SelectedIndexChanged);
             // 
             // airportGrp
             // 
+            this.airportGrp.Controls.Add(this.maxCostInput);
+            this.airportGrp.Controls.Add(this.maxCostLbl);
             this.airportGrp.Controls.Add(this.airportCombo);
             this.airportGrp.Controls.Add(this.airportLbl);
             this.airportGrp.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.airportGrp.Location = new System.Drawing.Point(12, 12);
             this.airportGrp.Name = "airportGrp";
-            this.airportGrp.Size = new System.Drawing.Size(358, 159);
+            this.airportGrp.Size = new System.Drawing.Size(358, 187);
             this.airportGrp.TabIndex = 6;
             this.airportGrp.TabStop = false;
             this.airportGrp.Text = "Airport";
+            // 
+            // maxCostInput
+            // 
+            this.maxCostInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.maxCostInput.Location = new System.Drawing.Point(14, 142);
+            this.maxCostInput.Name = "maxCostInput";
+            this.maxCostInput.Size = new System.Drawing.Size(100, 23);
+            this.maxCostInput.TabIndex = 5;
+            this.maxCostInput.TextChanged += new System.EventHandler(this.maxCostInput_TextChanged);
+            // 
+            // maxCostLbl
+            // 
+            this.maxCostLbl.AutoSize = true;
+            this.maxCostLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.maxCostLbl.Location = new System.Drawing.Point(10, 118);
+            this.maxCostLbl.Name = "maxCostLbl";
+            this.maxCostLbl.Size = new System.Drawing.Size(61, 20);
+            this.maxCostLbl.TabIndex = 4;
+            this.maxCostLbl.Text = "Budget";
             // 
             // trainGrp
             // 
@@ -102,7 +128,7 @@
             this.trainGrp.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.trainGrp.Location = new System.Drawing.Point(413, 12);
             this.trainGrp.Name = "trainGrp";
-            this.trainGrp.Size = new System.Drawing.Size(316, 159);
+            this.trainGrp.Size = new System.Drawing.Size(316, 276);
             this.trainGrp.TabIndex = 7;
             this.trainGrp.TabStop = false;
             this.trainGrp.Text = "Train";
@@ -132,22 +158,12 @@
             this.informationGrp.Controls.Add(this.departureDate);
             this.informationGrp.Controls.Add(this.returnDate);
             this.informationGrp.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.informationGrp.Location = new System.Drawing.Point(12, 196);
+            this.informationGrp.Location = new System.Drawing.Point(12, 223);
             this.informationGrp.Name = "informationGrp";
-            this.informationGrp.Size = new System.Drawing.Size(717, 200);
+            this.informationGrp.Size = new System.Drawing.Size(358, 200);
             this.informationGrp.TabIndex = 8;
             this.informationGrp.TabStop = false;
-            this.informationGrp.Text = "Information";
-            // 
-            // departureLbl
-            // 
-            this.departureLbl.AutoSize = true;
-            this.departureLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.departureLbl.Location = new System.Drawing.Point(6, 45);
-            this.departureLbl.Name = "departureLbl";
-            this.departureLbl.Size = new System.Drawing.Size(120, 20);
-            this.departureLbl.TabIndex = 6;
-            this.departureLbl.Text = "Departure Date";
+            this.informationGrp.Text = "Details";
             // 
             // returnDateLbl
             // 
@@ -159,12 +175,34 @@
             this.returnDateLbl.TabIndex = 7;
             this.returnDateLbl.Text = "Return Date";
             // 
+            // departureLbl
+            // 
+            this.departureLbl.AutoSize = true;
+            this.departureLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.departureLbl.Location = new System.Drawing.Point(6, 45);
+            this.departureLbl.Name = "departureLbl";
+            this.departureLbl.Size = new System.Drawing.Size(120, 20);
+            this.departureLbl.TabIndex = 6;
+            this.departureLbl.Text = "Departure Date";
+            // 
+            // travelBtn
+            // 
+            this.travelBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.travelBtn.Location = new System.Drawing.Point(566, 324);
+            this.travelBtn.Name = "travelBtn";
+            this.travelBtn.Size = new System.Drawing.Size(87, 46);
+            this.travelBtn.TabIndex = 9;
+            this.travelBtn.Text = "Travel";
+            this.travelBtn.UseVisualStyleBackColor = true;
+            this.travelBtn.Click += new System.EventHandler(this.travelBtn_Click);
+            // 
             // Observer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(757, 435);
+            this.Controls.Add(this.travelBtn);
             this.Controls.Add(this.informationGrp);
             this.Controls.Add(this.trainGrp);
             this.Controls.Add(this.airportGrp);
@@ -195,5 +233,8 @@
         private System.Windows.Forms.GroupBox informationGrp;
         private System.Windows.Forms.Label returnDateLbl;
         private System.Windows.Forms.Label departureLbl;
+        private System.Windows.Forms.Label maxCostLbl;
+        private System.Windows.Forms.TextBox maxCostInput;
+        private System.Windows.Forms.Button travelBtn;
     }
 }

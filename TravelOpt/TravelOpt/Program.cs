@@ -34,7 +34,7 @@ namespace TravelOpt
             if (loginForm.loggedIn)
             {
                 Console.WriteLine("Your in the app!" + loginForm.user_id);
-                Application.Run(new Observer(loginForm.user_id));
+                Application.Run(new Home(loginForm.user_id));
             }
             else
             {

@@ -12,22 +12,28 @@ using pg_data;
 
 namespace TravelOpt
 {
-    public partial class Observer : Form
+    public partial class Home : Form
     {
         private String _user_id;
         private Dictionary<String, String> _airportBindData;
         private Dictionary<String, String> _trainBindData;
-        private String _departureDate;
-        private String _returnDate;
+        private KeyValuePair<String, String> _selectedAirport;
+        private KeyValuePair<String, String> _selectedRailroad;
+        private DateTime _departureDate;
+        private DateTime _returnDate;
+        private String _selectedTransportation;
+        private int _maxPrice;
 
         public Dictionary<String, String> AirportBindData { get { return _airportBindData; } set { _airportBindData = value; } }
         public Dictionary<String, String> TrainBindData { get { return _trainBindData; } set { _trainBindData = value; } }
-        public String DepartureDate { get { return _departureDate; } set { _departureDate = value; } }
-        public String ReturnDate { get { return _returnDate; } set { _returnDate = value; } }
+        public DateTime DepartureDate { get { return _departureDate; } set { _departureDate = value; } }
+        public DateTime ReturnDate { get { return _returnDate; } set { _returnDate = value; } }
 
-        public Observer(String user_id)
+
+        public Home(String user_id)
         {
-            Console.WriteLine("In the observer!");
+            _selectedTransportation = "";
+            _maxPrice = 0;
             this._user_id = user_id;
             InitializeComponent();
             populateAirportBindData();
@@ -72,8 +78,6 @@ namespace TravelOpt
             {
                 try
                 {
-                    //Console.WriteLine("name: " + result[i]["name"]);
-                    //Console.WriteLine("acronym: " + result[i]["acronym"]);
                     if(!_trainBindData.ContainsKey((String)result[i]["name"]))
                     {
                         _trainBindData.Add((String)result[i]["name"], (String)result[i]["station_id"]);
@@ -100,7 +104,7 @@ namespace TravelOpt
             
             if (this.departureDate.Value.ToLocalTime() >= today)
             {
-                _departureDate = this.departureDate.Value.ToShortDateString();
+                _departureDate = this.departureDate.Value.ToLocalTime();
             }
             else
             {
@@ -115,12 +119,78 @@ namespace TravelOpt
             
             if (this.returnDate.Value.ToLocalTime() >= today)
             {
-                _returnDate = this.returnDate.Value.ToShortDateString();
+                _returnDate = this.returnDate.Value.ToLocalTime();
             }
             else
             {
                 MessageBox.Show("Please specify after today");
             }
+        }
+
+        private void travelBtn_Click(object sender, EventArgs e)
+        {
+            String errorMsg = "No Error";
+            if(_returnDate.ToLocalTime() <= DateTime.Now || _departureDate >= _returnDate)
+            {
+                errorMsg = "Please specify a departure and return date after today";
+            }
+            if (_selectedTransportation == "")
+            {
+                errorMsg = "Please select an airport or a railroad station";
+            }
+            if (_selectedTransportation == "airport" && _maxPrice <= 0)
+            {
+                errorMsg = "Please place your maximum price you're willing to pay in the budget box.";
+            }
+
+            if (errorMsg == "No Error")
+            {
+                //TODO Start your Subject here!
+            }
+            else
+            {
+                MessageBox.Show(errorMsg);
+            }
+        }
+
+        private void airportCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedTransportation = "airport";
+            foreach (KeyValuePair<string, string> airport in _airportBindData)
+            {
+                if(this.airportCombo.Text == airport.ToString())
+                {
+                    _selectedAirport = airport;
+                }
+            }
+        }
+
+        private void trainCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedTransportation = "railroad";
+            foreach (KeyValuePair<string, string> station in _trainBindData)
+            {
+                if (this.airportCombo.Text == station.ToString())
+                {
+                    _selectedRailroad = station;
+                }
+            }
+        }
+
+        private void maxCostInput_TextChanged(object sender, EventArgs e)
+        {
+            int temp;
+            if (Int32.TryParse(this.maxCostInput.Text, out temp))
+            {
+                _maxPrice = temp;
+            }
+            else
+            {
+                MessageBox.Show("Please select a numeric value");
+                maxCostInput.Clear();
+            }
+            
+                
         }
     }
 }
