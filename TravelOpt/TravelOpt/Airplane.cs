@@ -14,26 +14,36 @@ namespace TravelOpt
         private string _duration;
         private string _maxPrice;
 
-        public void apiComTest()
+        public Airplane(int cost, string destination, string origin, DateTime departureDay, DateTime returnDay, string maxPrice)
         {
-            DepartureDay = "2016-11-06--2016-11-26";
+            Cost = cost;
+            Destination = destination;
+            Origin = origin;
+            DepartureDay = departureDay;
+            ReturnDay = returnDay;
+            _duration = "";
+            _maxPrice = maxPrice;
+        }
+
+        public String apiComTest()
+        {
+            DepartureDay = Convert.ToDateTime("2016-11-06");
+            ReturnDay = Convert.ToDateTime("2016-11-26");
             Origin = "BOS";
-            _duration = "7--9";
+            //_duration = "7--9";
             _maxPrice = "500";
-            string apiUrl = _apiStart + _apiVersion + _apiMisc + "origin=" + Origin + "&departure_date=" + DepartureDay + "&duration=" + _duration + "&max_prcie=" + _maxPrice + "&apikey=" + _apiKey;
+            _duration = (ReturnDay.Day - DepartureDay.Day) + "--" + (ReturnDay.Day - DepartureDay.Day + 3);
+            if (ReturnDay.Day - DepartureDay.Day > 15)
+            {
+                _duration = "10--15";
+            }
+            string apiUrl = _apiStart + _apiVersion + _apiMisc + "origin=" + Origin + "&departure_date=" + DepartureDay.ToString("yyyy-MM-dd")+"--"+ReturnDay.ToString("yyyy-MM-dd") + "&duration=" + _duration + "&max_prcie=" + _maxPrice + "&apikey=" + _apiKey;
             Console.WriteLine(apiUrl);
             WebClient client = new WebClient();
             Stream stream = client.OpenRead(apiUrl);
             StreamReader reader = new StreamReader(stream);
             String content = reader.ReadToEnd();
-            Console.WriteLine(content);
+            return content;
         }
-
-        public void create()
-        {
-            Console.WriteLine("must create an Airplane");
-        }
-
-
     }
 }
