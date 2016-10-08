@@ -32,8 +32,8 @@ namespace TravelOpt
 
             //dbCall.setQuery("INSERT INTO hack.user (username,email,first_name,last_name,user_password) VALUES ('durp', 'durp@test.com','durp_first','durp_last','passYO');");
             //dbCall.db_dml();
-            ApiParser parseTest = new ApiParser();
-            parseTest.jsonTest();
+            //ApiParser parseTest = new ApiParser();
+            //parseTest.jsonTest();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -49,8 +49,8 @@ namespace TravelOpt
             {
                 //MessageBox.Show("You failed to login!");
             }
-            Train train = new Train();
-            String trainJson = train.apiComTest();
+            //Train train = new Train();
+            //String trainJson = train.apiComTest();
 
             //Airplane airplane = new Airplane();
             //String airportJson = airplane.apiComTest();
