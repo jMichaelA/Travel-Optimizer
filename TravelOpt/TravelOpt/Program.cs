@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Npgsql;
-using System.Data;
 using pg_data;
+using System.Windows.Forms;
 
 namespace TravelOpt
 {
@@ -27,12 +23,22 @@ namespace TravelOpt
                 Console.WriteLine("Username: " + result[i]["username"]);
             }
 
-            dbCall.setQuery("INSERT INTO hack.user (username,email,first_name,last_name,user_password) VALUES ('durp', 'durp@test.com','durp_first','durp_last','passYO');");
-            dbCall.db_dml();
+            //dbCall.setQuery("INSERT INTO hack.user (username,email,first_name,last_name,user_password) VALUES ('durp', 'durp@test.com','durp_first','durp_last','passYO');");
+            //dbCall.db_dml();
 
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new LoginForm());
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            LoginForm loginForm = new LoginForm();
+            Application.Run(loginForm);
+
+            if (loginForm.loggedIn)
+            {
+                Console.WriteLine("Your in the app!" + loginForm.user_id);
+            }
+            else
+            {
+                MessageBox.Show("You failed to login!");
+            }
             Train train = new Train();
             //train.apiComTest();
 

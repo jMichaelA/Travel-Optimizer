@@ -17,6 +17,13 @@ namespace pg_data
             this.queryString = query;
         }
 
+        private String formatString(String sql)
+        {
+            //sql = sql.Replace(System.Environment.NewLine, "replacement text");
+            sql.Trim(new Char[] { '\n', '\r'});
+            return sql;
+        }
+
         public void setQuery(String sql)
         {
             this.queryString = sql;
@@ -34,19 +41,27 @@ namespace pg_data
                 MessageBox.Show("Error :S" + exp);
             }
 
-            NpgsqlCommand command = new NpgsqlCommand(this.queryString, conn);
-            Console.WriteLine("query: " + this.queryString);
-            NpgsqlDataReader dr = command.ExecuteReader();
-
             List<Dictionary<String, String>> listOfRecords = new List<Dictionary<String, String>>();
-            while(dr.Read())
+
+            try
             {
-                for (int i = 0; i < dr.FieldCount; i++)
+                NpgsqlCommand command = new NpgsqlCommand(formatString(this.queryString), conn);
+                //Console.WriteLine("query: " + this.queryString);
+                NpgsqlDataReader dr = command.ExecuteReader();
+
+                while (dr.Read())
                 {
-                    Dictionary<String, String> tempDictionary = new Dictionary<String, String>();
-                    tempDictionary.Add((String)dr.GetName(i), (String)dr.GetString(i));
-                    listOfRecords.Add(tempDictionary);
+                    for (int i = 0; i < dr.FieldCount; i++)
+                    {
+                        Dictionary<String, String> tempDictionary = new Dictionary<String, String>();
+                        tempDictionary.Add((String)dr.GetName(i), (String)dr.GetString(i));
+                        listOfRecords.Add(tempDictionary);
+                    }
                 }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error :S" + exp);
             }
 
             try
@@ -73,8 +88,16 @@ namespace pg_data
                 MessageBox.Show("Error :S" + exp);
             }
 
-            NpgsqlCommand cmd = new NpgsqlCommand(this.queryString, conn);
-            cmd.ExecuteNonQuery();
+            // TODO: implement parsing methods to add parameters to query to prevent SQL injection.
+            try
+            {
+                NpgsqlCommand cmd = new NpgsqlCommand(this.queryString, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error :S" + exp);
+            }
 
             try
             {
