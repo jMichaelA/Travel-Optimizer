@@ -28,10 +28,19 @@ namespace TravelOpt
         private String getDestination(String symbol)
         {
             Console.WriteLine(symbol);
-            String sql = "SELECT name FROM hack.train_info WHERE station_id = " + symbol + "LIMIT 1;";
+            String sql = "SELECT name FROM hack.train_info WHERE station_id = '" + symbol + "' LIMIT 1;";
             DbQuery db = new DbQuery(sql);
             db.execute();
-            var destination = db.results[0]["name"];
+            var destination = "";
+            try
+            {
+               destination = db.results[0]["name"];
+            }
+            catch (Exception exp)
+            {
+                destination = "";
+            }
+            
             return destination;
         }
 
