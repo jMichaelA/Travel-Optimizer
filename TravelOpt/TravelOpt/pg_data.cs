@@ -50,12 +50,12 @@ namespace pg_data
 
                 while (dr.Read())
                 {
+                    Dictionary<String, String> tempDictionary = new Dictionary<String, String>();
                     for (int i = 0; i < dr.FieldCount; i++)
                     {
-                        Dictionary<String, String> tempDictionary = new Dictionary<String, String>();
-                        tempDictionary.Add((String)dr.GetName(i), (String)dr.GetString(i));
-                        listOfRecords.Add(tempDictionary);
+                        tempDictionary.Add((String)dr.GetName(i).ToString(), (String)dr.GetValue(i).ToString());
                     }
+                    listOfRecords.Add(tempDictionary);
                 }
             }
             catch (Exception exp)

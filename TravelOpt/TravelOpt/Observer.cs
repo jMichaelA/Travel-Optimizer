@@ -14,13 +14,14 @@ namespace TravelOpt
 {
     public partial class Observer : Form
     {
-        private int _user_id;
-        private Dictionary<string, string> _airportBindData;
+        private String _user_id;
+        private Dictionary<String, String> _airportBindData;
         
-        public Dictionary<string, string> AirportBindData { get { return _airportBindData; } set { _airportBindData = value; } }
+        public Dictionary<String, String> AirportBindData { get { return _airportBindData; } set { _airportBindData = value; } }
         
-        public Observer(int user_id)
+        public Observer(String user_id)
         {
+            Console.WriteLine("In the observer!");
             this._user_id = user_id;
             populateAirportBindData();
             InitializeComponent();
@@ -29,12 +30,22 @@ namespace TravelOpt
         private void populateAirportBindData()
         {
 
-            pgsql db = new pgsql("SELECT name, acronym FROM hack.city;");
+            pgsql db = new pgsql("SELECT name, acronym FROM hack.city LIMIT 100;");
             List<Dictionary<String, String>> result = db.db_multirow();
+            _airportBindData = new Dictionary<string, string>();
 
             for (int i = 0; i < result.Count; i++)
             {
-                _airportBindData.Add((string)result[i]["name"], (string)result[i]["acronym"]);
+                try
+                {
+                    //Console.WriteLine("name: " + result[i]["name"]);
+                    //Console.WriteLine("acronym: " + result[i]["acronym"]);
+                    _airportBindData.Add((String)result[i]["name"], (String)result[i]["acronym"]);
+                }
+                catch (Exception exp)
+                {
+                    //MessageBox.Show("The error is: " + exp);
+                }
             }
         }
 
