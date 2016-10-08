@@ -17,7 +17,12 @@ namespace pg_data
             this.queryString = query;
         }
 
-        public List<Dictionary<String, String>> run()
+        public void setQuery(String sql)
+        {
+            this.queryString = sql;
+        }
+
+        public List<Dictionary<String, String>> db_multirow()
         {
             NpgsqlConnection conn = new NpgsqlConnection("Server=pellefant-02.db.elephantsql.com;Port=5432;User Id=lzukdgiw;Password=P3RvimsAf1G_GxCUVwNYGwaKPWSR5Dop;Database=lzukdgiw;");
             try
@@ -55,5 +60,34 @@ namespace pg_data
 
             return listOfRecords;
         }
+
+        public bool db_dml()
+        {
+            NpgsqlConnection conn = new NpgsqlConnection("Server=pellefant-02.db.elephantsql.com;Port=5432;User Id=lzukdgiw;Password=P3RvimsAf1G_GxCUVwNYGwaKPWSR5Dop;Database=lzukdgiw;");
+            try
+            {
+                conn.Open();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error :S" + exp);
+            }
+
+            NpgsqlCommand cmd = new NpgsqlCommand(this.queryString, conn);
+            cmd.ExecuteNonQuery();
+
+            try
+            {
+                conn.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error :S");
+            }
+
+            return true;
+        }
+
+        
     }
 }
