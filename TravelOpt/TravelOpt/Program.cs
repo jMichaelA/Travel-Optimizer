@@ -57,12 +57,4 @@ namespace TravelOpt
 
         }
     }
-
-    internal class TravelFactory
-    {
-    }
-
-    internal class TransportFactory
-    {
-    }
 }
