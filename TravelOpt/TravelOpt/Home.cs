@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using pg_data;
 
+using TravelFactory;
+
 namespace TravelOpt
 {
     public partial class Home : Form
@@ -150,6 +152,8 @@ namespace TravelOpt
             if (errorMsg == "No Error")
             {
                 //TODO Start your Subject here!
+                TrainUI trainSubject = new TrainUI();
+                trainSubject.Show();
             }
             else
             {

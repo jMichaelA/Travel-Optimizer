@@ -16,7 +16,7 @@ namespace TravelFactory
         train
     }
 
-    public class Airplane : ITravelMethod
+    public partial class AirplaneUI : System.Windows.Forms.Form, ITravelMethod
     {
         private List<String> locations;
         public String getMethod()
@@ -33,7 +33,7 @@ namespace TravelFactory
         }
     }
 
-    public class Train : ITravelMethod
+    public partial class TrainUI : System.Windows.Forms.Form, ITravelMethod
     {
         private List<String> locations;
         public String getMethod()
@@ -57,9 +57,9 @@ namespace TravelFactory
             switch (type)
             {
                 case TransportType.airplane:
-                    return new Airplane();
+                    return new AirplaneUI();
                 case TransportType.train:
-                    return new Train();
+                    return new TrainUI();
                 default:
                     throw new NotSupportedException();
             }

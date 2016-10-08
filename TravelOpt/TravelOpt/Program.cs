@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using pg_data;
 using System.Windows.Forms;
+using TravelFactory;
 
 namespace TravelOpt
 {
@@ -14,16 +15,20 @@ namespace TravelOpt
         [STAThread]
         static void Main()
         {
-            List<Dictionary<String, String>> result = new List<Dictionary<String, String>>();
-            DbQuery dbCall = new DbQuery("SELECT username FROM hack.user;");
-            dbCall.execute();
-            result = dbCall.getResults();
-            Console.WriteLine("the number of results is: " + result.Count);
 
-            for (int i = 0; i < result.Count; i++)
-            {
-                Console.WriteLine("Username: " + result[i]["username"]);
-            }
+            //transportFactory testing = new transportFactory();
+            //var transport = testing.getTransport(TransportType.airplane);
+
+            //List<Dictionary<String, String>> result = new List<Dictionary<String, String>>();
+            //DbQuery dbCall = new DbQuery("SELECT username FROM hack.user;");
+            //dbCall.execute();
+            //result = dbCall.getResults();
+            //Console.WriteLine("the number of results is: " + result.Count);
+
+            //for (int i = 0; i < result.Count; i++)
+            //{
+            //    Console.WriteLine("Username: " + result[i]["username"]);
+            //}
 
             //dbCall.setQuery("INSERT INTO hack.user (username,email,first_name,last_name,user_password) VALUES ('durp', 'durp@test.com','durp_first','durp_last','passYO');");
             //dbCall.db_dml();
@@ -51,5 +56,13 @@ namespace TravelOpt
             //String airportJson = airplane.apiComTest();
 
         }
+    }
+
+    internal class TravelFactory
+    {
+    }
+
+    internal class TransportFactory
+    {
     }
 }

@@ -65,8 +65,17 @@
     <Compile Include="Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITravelMethod.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="IDatabaseBehavior.cs" />
     <Compile Include="pg_data.cs" />
+    <Compile Include="TrainUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrainUI.Designer.cs">
+      <DependentUpon>TrainUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Transport.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -93,6 +102,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TrainUI.resx">
+      <DependentUpon>TrainUI.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
