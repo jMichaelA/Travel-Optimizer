@@ -150,6 +150,17 @@ namespace TravelOpt
             if (errorMsg == "No Error")
             {
                 //TODO Start your Subject here!
+                if(_selectedTransportation == "airport")
+                {
+                    Console.WriteLine("Implement airport");
+                }
+
+                else
+                {
+                    ApiParser parse = new ApiParser(_departureDate, _selectedRailroad.Value, _maxPrice.ToString());
+                    List<Train> trains = parse.getTrains();
+                }
+
             }
             else
             {
@@ -174,7 +185,7 @@ namespace TravelOpt
             _selectedTransportation = "railroad";
             foreach (KeyValuePair<string, string> station in _trainBindData)
             {
-                if (this.airportCombo.Text == station.ToString())
+                if (this.trainCombo.Text == station.ToString())
                 {
                     _selectedRailroad = station;
                 }
