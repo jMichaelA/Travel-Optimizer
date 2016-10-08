@@ -15,7 +15,7 @@ namespace TravelOpt
         [STAThread]
         static void Main()
         {
-            NpgsqlConnection conn = new NpgsqlConnection("Server=pellefant-02.db.elephantsql.com;Port=5432;UserId=lzukdgiw;Password=P3RvimsAf1G_GxCUVwNYGwaKPWSR5Dop;Database=lzukdgiw;");
+            NpgsqlConnection conn = new NpgsqlConnection("Server=pellefant-02.db.elephantsql.com;Port=5432;User Id=lzukdgiw;Password=P3RvimsAf1G_GxCUVwNYGwaKPWSR5Dop;Database=lzukdgiw;");
 
             try
             {
@@ -37,14 +37,16 @@ namespace TravelOpt
                 MessageBox.Show("Error :S");
             }
 
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new LoginForm());
-            Train train = new Train();
-            train.apiComTest();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Observer(conn));
+            //Train train = new Train();
+            //train.apiComTest();
 
-            Airplane airplane = new Airplane();
-            airplane.apiComTest();
+            //Airplane airplane = new Airplane();
+            //airplane.apiComTest();
+
+
         }
     }
 }

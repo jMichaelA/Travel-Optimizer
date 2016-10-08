@@ -51,6 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Airplane.cs" />
+    <Compile Include="Observer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Observer.Designer.cs">
+      <DependentUpon>Observer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Transport.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -64,6 +70,9 @@
     <Compile Include="Transportation.cs" />
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Observer.resx">
+      <DependentUpon>Observer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
