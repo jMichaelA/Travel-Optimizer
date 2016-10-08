@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace TravelOpt
 {
-    interface create
+    public interface Transport
     {
+        void create();
+        void apiComTest();
     }
 }

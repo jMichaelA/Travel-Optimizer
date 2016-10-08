@@ -37,9 +37,14 @@ namespace TravelOpt
                 MessageBox.Show("Error :S");
             }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new LoginForm());
+            Train train = new Train();
+            train.apiComTest();
+
+            Airplane airplane = new Airplane();
+            airplane.apiComTest();
         }
     }
 }
