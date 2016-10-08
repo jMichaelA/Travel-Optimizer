@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using pg_data;
 using System.Windows.Forms;
-using Npgsql;
 
 namespace TravelOpt
 {
@@ -12,29 +10,34 @@ namespace TravelOpt
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
         [STAThread]
         static void Main()
         {
-            NpgsqlConnection conn = new NpgsqlConnection("Server=pellefant-02.db.elephantsql.com;Port=5432;User Id=lzukdgiw;Password=P3RvimsAf1G_GxCUVwNYGwaKPWSR5Dop;Database=lzukdgiw;");
 
-            try
+            pgsql dbCall = new pgsql("SELECT username FROM hack.user;");
+            List<Dictionary<String, String>> result = dbCall.db_multirow();
+
+            for (int i = 0; i < result.Count; i++)
             {
-                conn.Open();
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show("Error :S");
+                Console.WriteLine("Username: " + result[i]["username"]);
             }
 
-            // Do DB stuff here
+            //dbCall.setQuery("INSERT INTO hack.user (username,email,first_name,last_name,user_password) VALUES ('durp', 'durp@test.com','durp_first','durp_last','passYO');");
+            //dbCall.db_dml();
 
-            try
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            LoginForm loginForm = new LoginForm();
+            Application.Run(loginForm);
+
+            if (loginForm.loggedIn)
             {
-                conn.Close();
+                Console.WriteLine("Your in the app!" + loginForm.user_id);
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show("Error :S");
+                MessageBox.Show("You failed to login!");
             }
 
             Application.EnableVisualStyles();
@@ -45,7 +48,6 @@ namespace TravelOpt
 
             //Airplane airplane = new Airplane();
             //airplane.apiComTest();
-
 
         }
     }

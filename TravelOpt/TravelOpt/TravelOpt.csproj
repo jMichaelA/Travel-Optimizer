@@ -57,6 +57,7 @@
     <Compile Include="Observer.Designer.cs">
       <DependentUpon>Observer.cs</DependentUpon>
     </Compile>
+    <Compile Include="pg_data.cs" />
     <Compile Include="Transport.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
