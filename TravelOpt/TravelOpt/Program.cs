@@ -14,9 +14,11 @@ namespace TravelOpt
         [STAThread]
         static void Main()
         {
-
-            pgsql dbCall = new pgsql("SELECT username FROM hack.user;");
-            List<Dictionary<String, String>> result = dbCall.db_multirow();
+            List<Dictionary<String, String>> result = new List<Dictionary<String, String>>();
+            DbQuery dbCall = new DbQuery("SELECT username FROM hack.user;");
+            dbCall.execute();
+            result = dbCall.getResults();
+            Console.WriteLine("the number of results is: " + result.Count);
 
             for (int i = 0; i < result.Count; i++)
             {

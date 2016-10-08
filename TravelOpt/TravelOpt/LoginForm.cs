@@ -26,11 +26,12 @@ namespace TravelOpt
             String username = this.userNameText.Text;
             String password = this.passwordText.Text;
 
-            pgsql db = new pgsql(@"SELECT * 
+            DbQuery dbCall = new DbQuery(@"SELECT * 
                                     FROM hack.user 
                                     WHERE username = '" + username + "' AND user_password = '" + password + "';");
+            dbCall.execute();
 
-            List<Dictionary<String, String>> result = db.db_multirow();
+            List<Dictionary<String, String>> result = dbCall.results;
             if (result.Count > 0)
             {
                 Console.WriteLine("Logged in!");
@@ -58,21 +59,23 @@ namespace TravelOpt
             }
             else
             {
-                pgsql db = new pgsql(@"SELECT * 
+                DbQuery dbCall = new DbQuery(@"SELECT * 
                                     FROM hack.user 
                                     WHERE username = '" + username + "';");
-                List<Dictionary<String, String>>  result = db.db_multirow();
+                dbCall.execute();
+                List<Dictionary<String, String>>  result = dbCall.results;
                 if (result.Count <= 0)
                 {
-                    db.setQuery(@"SELECT * 
+                    DbQuery dbCall2 = new DbQuery(@"SELECT * 
                                     FROM hack.user 
                                     WHERE email = '" + email + "';");
+                    dbCall2.execute();
 
-                    result = db.db_multirow();
+                    result = dbCall2.results;
                     if (result.Count <= 0)
                     {
                         //Create account here.
-                        db.setQuery(@"INSERT INTO hack.user (
+                        DbManip dbInsert = new DbManip(@"INSERT INTO hack.user (
                                         username,
                                         email,
                                         user_password,
@@ -81,10 +84,11 @@ namespace TravelOpt
                                     ) VALUES (
                                         '"+ username +"','"+ email +"','"+ pass1 + "', ' ', ' '" + @"
                                     );");
-                        db.db_dml();
+                        dbInsert.execute();
 
-                        db.setQuery(@"SELECT * FROM hack.user WHERE email = '" + email + "';");
-                        result = db.db_multirow();
+                        DbQuery userInfo = new DbQuery(@"SELECT * FROM hack.user WHERE email = '" + email + "';");
+                        userInfo.execute();
+                        result = userInfo.results;
                         this.loggedIn = true;
                         this.user_id = result[0]["user_id"];
                         this.Close();

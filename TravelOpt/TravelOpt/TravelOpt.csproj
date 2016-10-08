@@ -51,12 +51,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Airplane.cs" />
+    <Compile Include="dbAbstract.cs" />
+    <Compile Include="DbManip.cs" />
+    <Compile Include="DbQuery.cs" />
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
+    <Compile Include="IDatabaseBehavior.cs" />
     <Compile Include="pg_data.cs" />
     <Compile Include="Transport.cs" />
     <Compile Include="LoginForm.cs">

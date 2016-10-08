@@ -43,8 +43,9 @@ namespace TravelOpt
         private void populateAirportBindData()
         {
 
-            pgsql db = new pgsql("SELECT name, acronym FROM hack.city;");
-            List<Dictionary<String, String>> result = db.db_multirow();
+            DbQuery db = new DbQuery("SELECT name, acronym FROM hack.city;");
+            db.execute();
+            List<Dictionary<String, String>> result = db.results;
             _airportBindData = new Dictionary<string, string>();
 
             for (int i = 0; i < result.Count; i++)
@@ -70,9 +71,12 @@ namespace TravelOpt
         private void populateTrainBindData()
         {
 
-            pgsql db = new pgsql("SELECT name, station_id FROM hack.train_info;");
-            List<Dictionary<String, String>> result = db.db_multirow();
+            DbQuery db = new DbQuery("SELECT name, station_id FROM hack.train_info;");
+            db.execute();
+            List<Dictionary<String, String>> result = db.results;
             _trainBindData = new Dictionary<string, string>();
+
+            Console.WriteLine("The count of users is: " + result[0]["name"]);
 
             for (int i = 0; i < result.Count; i++)
             {
