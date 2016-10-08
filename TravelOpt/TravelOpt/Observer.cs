@@ -16,15 +16,18 @@ namespace TravelOpt
     {
         private String _user_id;
         private Dictionary<String, String> _airportBindData;
-        
+        private Dictionary<String, String> _trainBindData;
+
         public Dictionary<String, String> AirportBindData { get { return _airportBindData; } set { _airportBindData = value; } }
-        
+        public Dictionary<String, String> TrainBindData { get { return _trainBindData; } set { _trainBindData = value; } }
+
         public Observer(String user_id)
         {
             Console.WriteLine("In the observer!");
             this._user_id = user_id;
             InitializeComponent();
             populateAirportBindData();
+            populateTrainBindData();
         }
 
         private void populateAirportBindData()
@@ -49,6 +52,30 @@ namespace TravelOpt
             }
             this.airportCombo.DataSource = new BindingSource(_airportBindData, null);
             this.airportCombo.DisplayMember = "name";
+        }
+
+        private void populateTrainBindData()
+        {
+
+            pgsql db = new pgsql("SELECT name, station_id FROM hack.train_info;");
+            List<Dictionary<String, String>> result = db.db_multirow();
+            _trainBindData = new Dictionary<string, string>();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                try
+                {
+                    //Console.WriteLine("name: " + result[i]["name"]);
+                    //Console.WriteLine("acronym: " + result[i]["acronym"]);
+                    _trainBindData.Add((String)result[i]["name"], (String)result[i]["station_id"]);
+                }
+                catch (Exception exp)
+                {
+                    //MessageBox.Show("The error is: " + exp);
+                }
+            }
+            this.trainCombo.DataSource = new BindingSource(_trainBindData, null);
+            this.trainCombo.DisplayMember = "name";
         }
 
         private void Observer_Load(object sender, EventArgs e)
