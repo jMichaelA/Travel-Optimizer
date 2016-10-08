@@ -123,6 +123,7 @@
             this.returnDate.Name = "returnDate";
             this.returnDate.Size = new System.Drawing.Size(224, 20);
             this.returnDate.TabIndex = 5;
+            this.returnDate.ValueChanged += new System.EventHandler(this.returnDate_ValueChanged);
             // 
             // informationGrp
             // 

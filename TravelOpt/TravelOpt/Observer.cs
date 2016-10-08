@@ -18,10 +18,12 @@ namespace TravelOpt
         private Dictionary<String, String> _airportBindData;
         private Dictionary<String, String> _trainBindData;
         private String _departureDate;
+        private String _returnDate;
 
         public Dictionary<String, String> AirportBindData { get { return _airportBindData; } set { _airportBindData = value; } }
         public Dictionary<String, String> TrainBindData { get { return _trainBindData; } set { _trainBindData = value; } }
         public String DepartureDate { get { return _departureDate; } set { _departureDate = value; } }
+        public String ReturnDate { get { return _returnDate; } set { _returnDate = value; } }
 
         public Observer(String user_id)
         {
@@ -45,7 +47,10 @@ namespace TravelOpt
                 {
                     //Console.WriteLine("name: " + result[i]["name"]);
                     //Console.WriteLine("acronym: " + result[i]["acronym"]);
-                    _airportBindData.Add((String)result[i]["name"], (String)result[i]["acronym"]);
+                    if(!_airportBindData.ContainsKey((String)result[i]["name"]))
+                    {
+                        _airportBindData.Add((String)result[i]["name"], (String)result[i]["acronym"]);
+                    }
                 }
                 catch (Exception exp)
                 {
@@ -69,7 +74,11 @@ namespace TravelOpt
                 {
                     //Console.WriteLine("name: " + result[i]["name"]);
                     //Console.WriteLine("acronym: " + result[i]["acronym"]);
-                    _trainBindData.Add((String)result[i]["name"], (String)result[i]["station_id"]);
+                    if(!_trainBindData.ContainsKey((String)result[i]["name"]))
+                    {
+                        _trainBindData.Add((String)result[i]["name"], (String)result[i]["station_id"]);
+                    }
+                    
                 }
                 catch (Exception exp)
                 {
@@ -87,7 +96,31 @@ namespace TravelOpt
 
         private void departureDate_ValueChanged(object sender, EventArgs e)
         {
-            this.departureDate.Value
+            DateTime today = DateTime.Now;
+            
+            if (this.departureDate.Value.ToLocalTime() >= today)
+            {
+                _departureDate = this.departureDate.Value.ToShortDateString();
+            }
+            else
+            {
+                MessageBox.Show("Please specify after a day after today");
+            }
+            
+        }
+
+        private void returnDate_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime today = DateTime.Now;
+            
+            if (this.returnDate.Value.ToLocalTime() >= today)
+            {
+                _returnDate = this.returnDate.Value.ToShortDateString();
+            }
+            else
+            {
+                MessageBox.Show("Please specify after today");
+            }
         }
     }
 }
