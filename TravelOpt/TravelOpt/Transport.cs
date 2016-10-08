@@ -8,7 +8,6 @@ namespace TravelOpt
 {
     public interface Transport
     {
-        void create();
-        void apiComTest();
+        String apiComTest();
     }
 }

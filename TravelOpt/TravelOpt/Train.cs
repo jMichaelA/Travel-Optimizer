@@ -12,22 +12,17 @@ namespace TravelOpt
     {
         private const string _apiMisc = "/trains/schedule-search?";
 
-        public void create()
+        public String apiComTest()
         {
-            Console.WriteLine("Must create a train");
-        }
-
-        public void apiComTest()
-        {
-            DepartureDay = "2016-10-13";
+            DepartureDay = Convert.ToDateTime("2016-11-13");
             Origin = "8302589";
-            string apiUrl = _apiStart + _apiVersion + _apiMisc + "origin="+ Origin +"&departure_date=" + DepartureDay +"&apikey=" + _apiKey;
+            string apiUrl = _apiStart + _apiVersion + _apiMisc + "origin="+ Origin +"&departure_date=" + DepartureDay.ToString("yyyy-MM-dd") +"&apikey=" + _apiKey;
             Console.WriteLine(apiUrl);
             WebClient client = new WebClient();
             Stream stream = client.OpenRead(apiUrl);
             StreamReader reader = new StreamReader(stream);
             String content = reader.ReadToEnd();
-            Console.WriteLine(content);
+            return content;
         }
     }
 }
