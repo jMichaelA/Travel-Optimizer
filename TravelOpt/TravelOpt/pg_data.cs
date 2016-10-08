@@ -19,7 +19,6 @@ namespace pg_data
 
         private String formatString(String sql)
         {
-            //sql = sql.Replace(System.Environment.NewLine, "replacement text");
             sql.Trim(new Char[] { '\n', '\r'});
             return sql;
         }

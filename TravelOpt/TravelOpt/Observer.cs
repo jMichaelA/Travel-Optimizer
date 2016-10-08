@@ -8,50 +8,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pg_data;
 
 namespace TravelOpt
 {
     public partial class Observer : Form
     {
-        private NpgsqlConnection _conn;
+        private int _user_id;
         private Dictionary<string, string> _airportBindData;
         
         public Dictionary<string, string> AirportBindData { get { return _airportBindData; } set { _airportBindData = value; } }
-        public NpgsqlConnection Conn { get { return _conn; } set { _conn = value; } }
-
         
-        public Observer(NpgsqlConnection conn)
+        public Observer(int user_id)
         {
-            _conn = conn;
+            this._user_id = user_id;
             populateAirportBindData();
             InitializeComponent();
         }
 
         private void populateAirportBindData()
         {
-            try
-            {
-                _conn.Open();
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show("Error " + exp);
-            }
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT name, acronym FROM hack.city LIMIT 100;", _conn);
-            NpgsqlDataReader dr = command.ExecuteReader();
+            pgsql db = new pgsql("SELECT name, acronym FROM hack.city;");
+            List<Dictionary<String, String>> result = db.db_multirow();
 
-            while (dr.Read())
-                _airportBindData.Add((string)dr[0], (string)dr[1]);
+            for (int i = 0; i < result.Count; i++)
+            {
+                _airportBindData.Add((string)result[i]["name"], (string)result[i]["acronym"]);
+            }
+        }
 
-            try
-            {
-                _conn.Close();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error :S");
-            }
+        private void Observer_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

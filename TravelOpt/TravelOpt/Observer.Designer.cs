@@ -60,6 +60,7 @@
             this.Controls.Add(this.airportCombo);
             this.Name = "Observer";
             this.Text = "Guide";
+            this.Load += new System.EventHandler(this.Observer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

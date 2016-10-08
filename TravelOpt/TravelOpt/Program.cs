@@ -34,15 +34,12 @@ namespace TravelOpt
             if (loginForm.loggedIn)
             {
                 Console.WriteLine("Your in the app!" + loginForm.user_id);
+                Application.Run(new Observer(Int32.Parse(loginForm.user_id)));
             }
             else
             {
                 MessageBox.Show("You failed to login!");
             }
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Observer(conn));
             //Train train = new Train();
             //train.apiComTest();
 
