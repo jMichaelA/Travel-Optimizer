@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Airplane.cs" />
+    <Compile Include="pg_data.cs" />
     <Compile Include="Transport.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>

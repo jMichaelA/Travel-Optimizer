@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
+using System.Data;
+using pg_data;
 
 namespace TravelOpt
 {
@@ -12,39 +14,27 @@ namespace TravelOpt
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
         [STAThread]
         static void Main()
         {
-            NpgsqlConnection conn = new NpgsqlConnection("Server=pellefant-02.db.elephantsql.com;Port=5432;UserId=lzukdgiw;Password=P3RvimsAf1G_GxCUVwNYGwaKPWSR5Dop;Database=lzukdgiw;");
 
-            try
-            {
-                conn.Open();
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show("Error :S");
-            }
+            pgsql query = new pgsql("SELECT username FROM hack.user;");
+            List<Dictionary<String, String>> result = query.run();
 
-            // Do DB stuff here
-
-            try
+            for (int i = 0; i < result.Count; i++)
             {
-                conn.Close();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error :S");
+                Console.WriteLine("Username: " + result[i]["username"]);
             }
 
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new LoginForm());
             Train train = new Train();
-            train.apiComTest();
+            //train.apiComTest();
 
             Airplane airplane = new Airplane();
-            airplane.apiComTest();
+            //airplane.apiComTest();
         }
     }
 }
