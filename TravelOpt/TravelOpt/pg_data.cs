@@ -28,6 +28,7 @@ namespace pg_data
             this.queryString = sql;
         }
 
+        // Method used for querying data.
         public List<Dictionary<String, String>> db_multirow()
         {
             NpgsqlConnection conn = new NpgsqlConnection("Server=pellefant-02.db.elephantsql.com;Port=5432;User Id=lzukdgiw;Password=P3RvimsAf1G_GxCUVwNYGwaKPWSR5Dop;Database=lzukdgiw;");
@@ -75,6 +76,7 @@ namespace pg_data
             return listOfRecords;
         }
 
+        // Method used for manipulating data.
         public bool db_dml()
         {
             NpgsqlConnection conn = new NpgsqlConnection("Server=pellefant-02.db.elephantsql.com;Port=5432;User Id=lzukdgiw;Password=P3RvimsAf1G_GxCUVwNYGwaKPWSR5Dop;Database=lzukdgiw;");

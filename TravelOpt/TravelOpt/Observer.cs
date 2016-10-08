@@ -23,14 +23,14 @@ namespace TravelOpt
         {
             Console.WriteLine("In the observer!");
             this._user_id = user_id;
-            populateAirportBindData();
             InitializeComponent();
+            populateAirportBindData();
         }
 
         private void populateAirportBindData()
         {
 
-            pgsql db = new pgsql("SELECT name, acronym FROM hack.city LIMIT 100;");
+            pgsql db = new pgsql("SELECT name, acronym FROM hack.city;");
             List<Dictionary<String, String>> result = db.db_multirow();
             _airportBindData = new Dictionary<string, string>();
 
@@ -47,6 +47,8 @@ namespace TravelOpt
                     //MessageBox.Show("The error is: " + exp);
                 }
             }
+            this.airportCombo.DataSource = new BindingSource(_airportBindData, null);
+            this.airportCombo.DisplayMember = "name";
         }
 
         private void Observer_Load(object sender, EventArgs e)
