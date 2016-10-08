@@ -17,9 +17,11 @@ namespace TravelOpt
         private String _user_id;
         private Dictionary<String, String> _airportBindData;
         private Dictionary<String, String> _trainBindData;
+        private String _departureDate;
 
         public Dictionary<String, String> AirportBindData { get { return _airportBindData; } set { _airportBindData = value; } }
         public Dictionary<String, String> TrainBindData { get { return _trainBindData; } set { _trainBindData = value; } }
+        public String DepartureDate { get { return _departureDate; } set { _departureDate = value; } }
 
         public Observer(String user_id)
         {
@@ -81,6 +83,11 @@ namespace TravelOpt
         private void Observer_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void departureDate_ValueChanged(object sender, EventArgs e)
+        {
+            this.departureDate.Value
         }
     }
 }

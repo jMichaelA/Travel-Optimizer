@@ -114,6 +114,7 @@
             this.departureDate.Name = "departureDate";
             this.departureDate.Size = new System.Drawing.Size(224, 20);
             this.departureDate.TabIndex = 4;
+            this.departureDate.ValueChanged += new System.EventHandler(this.departureDate_ValueChanged);
             // 
             // returnDate
             // 
