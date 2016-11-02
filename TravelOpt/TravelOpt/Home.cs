@@ -152,9 +152,9 @@ namespace TravelOpt
             if (errorMsg == "No Error")
             {
                 //TODO Start your Subject here!
-                //TrainUI trainSubject = new TrainUI();
-                //trainSubject.Show();
-                if(_selectedTransportation == "airport")
+                TrainUI trainSubject = new TrainUI();
+                trainSubject.Show();
+                if (_selectedTransportation == "airport")
                 {
                     Console.WriteLine("Implement airport");
                 }

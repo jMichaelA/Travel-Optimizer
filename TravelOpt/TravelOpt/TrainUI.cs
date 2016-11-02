@@ -16,6 +16,12 @@ namespace TravelFactory
         public TrainUI()
         {
             InitializeComponent();
+            this.timesListBox.Items.Add("2014-10-13T06:32");
+            this.timesListBox.Items.Add("2014-10-13T14:32");
+            this.timesListBox.Items.Add("2014-10-13T17:3");
+            this.destinationList.Items.Add("8300035");
+            this.destinationList.Items.Add("8306421");
+            this.destinationList.Items.Add("8311145");
         }
 
         private void TrainUI_Load(object sender, EventArgs e)
