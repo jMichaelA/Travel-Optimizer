@@ -14,7 +14,7 @@ namespace TravelOpt
         private string _duration;
         private string _maxPrice;
 
-        public Airplane(int cost, string destination, string origin, DateTime departureDay, DateTime returnDay, string maxPrice)
+        public Airplane(int cost, string destination, string origin, string departureDay, string returnDay, string maxPrice)
         {
             Cost = cost;
             Destination = destination;
@@ -27,17 +27,19 @@ namespace TravelOpt
 
         public String apiComTest()
         {
-            DepartureDay = Convert.ToDateTime("2016-11-06");
-            ReturnDay = Convert.ToDateTime("2016-11-26");
+            DepartureDay = "2016-11-06";
+            ReturnDay = "2016-11-26";
+            DateTime departureDay = Convert.ToDateTime(DepartureDay);
+            DateTime returnDay = Convert.ToDateTime(ReturnDay);
             Origin = "BOS";
             //_duration = "7--9";
             _maxPrice = "500";
-            _duration = (ReturnDay.Day - DepartureDay.Day) + "--" + (ReturnDay.Day - DepartureDay.Day + 3);
-            if (ReturnDay.Day - DepartureDay.Day > 15)
+            _duration = (returnDay.Day - departureDay.Day) + "--" + (returnDay.Day - departureDay.Day + 3);
+            if (returnDay.Day - departureDay.Day > 15)
             {
                 _duration = "10--15";
             }
-            string apiUrl = _apiStart + _apiVersion + _apiMisc + "origin=" + Origin + "&departure_date=" + DepartureDay.ToString("yyyy-MM-dd")+"--"+ReturnDay.ToString("yyyy-MM-dd") + "&duration=" + _duration + "&max_prcie=" + _maxPrice + "&apikey=" + _apiKey;
+            string apiUrl = _apiStart + _apiVersion + _apiMisc + "origin=" + Origin + "&departure_date=" + departureDay.ToString("yyyy-MM-dd")+"--"+returnDay.ToString("yyyy-MM-dd") + "&duration=" + _duration + "&max_prcie=" + _maxPrice + "&apikey=" + _apiKey;
             Console.WriteLine(apiUrl);
             WebClient client = new WebClient();
             Stream stream = client.OpenRead(apiUrl);

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using TravelOpt;
 
 namespace TravelFactory
 {
     public interface ITravelMethod
     {
         String getMethod();
-        List<String> getLocations();
+        void getLocations();
         void convertSymbolToLocation();
     }
 
@@ -23,9 +24,9 @@ namespace TravelFactory
         {
             return "Airplane";
         }
-        public List<String> getLocations()
+        public void getLocations()
         {
-            return locations;
+            
         }
         public void convertSymbolToLocation()
         {
@@ -35,18 +36,48 @@ namespace TravelFactory
 
     public partial class TrainUI : System.Windows.Forms.Form, ITravelMethod
     {
-        private List<String> locations;
+        private List<String> _locations = new List<String> { };
+        private List<String> _departureTimes = new List<String> { };
+        private List<Train> _trains;
+
+        public TrainUI(List<Train> trains)
+        {
+            InitializeComponent();
+            _trains = trains;
+            getLocations();
+            addLocationsToList();
+        }
+
         public String getMethod()
         {
             return "Train *CHOO CHOO*";
         }
-        public List<String> getLocations()
+        public void getLocations()
         {
-            return locations;
+            foreach (var train in _trains)
+            {
+                if(train.Destination != "")
+                {
+                    _locations.Add(train.Destination);
+                    _departureTimes.Add(train.ChildDepartureDay);
+                }
+            }
         }
         public void convertSymbolToLocation()
         {
 
+        }
+        public void addLocationsToList()
+        {
+            foreach (var train in _trains)
+            {
+                if(train.Destination != "")
+                {
+                    this.destinationList.Items.Add(train.Destination);
+                    this.timesListBox.Items.Add(train.ChildDepartureDay);
+                    Console.WriteLine("\n\n gasp");
+                }
+            }
         }
     }
 

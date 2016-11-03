@@ -14,25 +14,25 @@ namespace TravelOpt
         public const string _apiStart = "http://api.sandbox.amadeus.com/";
         public const string _apiKey = "bnRwWHdSaSXJMLKtMljloLFf7f6oYlIo";
         public const string _apiVersion = "v1.2";
-        private DateTime _departureDay;
-        private DateTime _returnDay;
+        private string _departureDay;
+        private string _returnDay;
 
         public int? Cost { get { return _price; } set { _price = value; } }
         public string Destination { get { return _destination; } set { _destination = value; } }
         public string Origin { get { return _origin; } set { _origin = value; } }
-        public DateTime DepartureDay { get { return _departureDay; } set { _departureDay = value; } }
-        public DateTime ReturnDay { get { return _returnDay; } set { _returnDay = value; } }
+        public string DepartureDay { get { return _departureDay; } set { _departureDay = value; } }
+        public string ReturnDay { get { return _returnDay; } set { _returnDay = value; } }
 
         public Transportation()
         {
             _price = null;
             _destination = "";
             _origin = "";
-            _departureDay = new DateTime();
-            _returnDay = new DateTime();
+            _departureDay = "";
+            _returnDay = "";
         }
 
-        public Transportation(int cost, string destination, string origin, DateTime departureDay, DateTime returnDay )
+        public Transportation(int cost, string destination, string origin, string departureDay, string returnDay )
         {
             _price = cost;
             _destination = destination;

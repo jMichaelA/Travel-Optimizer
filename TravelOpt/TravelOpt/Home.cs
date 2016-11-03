@@ -152,18 +152,23 @@ namespace TravelOpt
             if (errorMsg == "No Error")
             {
                 //TODO Start your Subject here!
-                TrainUI trainSubject = new TrainUI();
-                trainSubject.Show();
+                
                 if (_selectedTransportation == "airport")
                 {
                     Console.WriteLine("Implement airport");
                 }
-
-                else
+                else if (_selectedTransportation == "railroad")
                 {
                     ApiParser parse = new ApiParser(_departureDate, _selectedRailroad.Value, _maxPrice.ToString());
                     List<Train> trains = parse.getTrains();
+                    TrainUI trainSubject = new TrainUI(trains);
+                    trainSubject.Show();
                 }
+                //else
+                //{
+                //    ApiParser parse = new ApiParser(_departureDate, _selectedRailroad.Value, _maxPrice.ToString());
+                //    List<Train> trains = parse.getTrains();
+                //}
             }
             else
             {
