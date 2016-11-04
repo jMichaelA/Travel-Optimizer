@@ -147,14 +147,14 @@ namespace TravelFactory
 
     public class transportFactory
     {
-        public System.Windows.Forms.Form getTransport(TransportType type)
+        public System.Windows.Forms.Form getTransport(TransportType type, List<Train> trains, List<Airplane> airplanes)
         {
             switch (type)
             {
                 case TransportType.airplane:
                     return new AirplaneUI();
                 case TransportType.train:
-                    return new TrainUI();
+                    return new TrainUI(trains);
                 default:
                     throw new NotSupportedException();
             }

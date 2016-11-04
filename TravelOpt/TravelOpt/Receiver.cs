@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TravelFactory;
 
 namespace TravelOpt
@@ -30,9 +31,13 @@ namespace TravelOpt
 
             if (transport == "railroad")
             {
-               trains = parse.getTrains(_departureDate, _origin, _maxPrice);
-               TrainUI trainSubject = new TrainUI(trains);
-               trainSubject.Show();
+                trains = parse.getTrains(_departureDate, _origin, _maxPrice);
+                transportFactory trainSubject = new transportFactory();
+                TransportType method = TransportType.train;
+                Form modal = trainSubject.getTransport(method, trains, null);
+                modal.Show();
+               // TrainUI trainSubject = new TrainUI(trains);
+               //trainSubject.Show();
             }
             else if(transport == "airplane")
             {

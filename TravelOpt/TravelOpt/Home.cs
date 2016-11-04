@@ -158,7 +158,7 @@ namespace TravelOpt
                     Console.WriteLine("Implement airport");
                     transportFactory airplainSubject = new transportFactory();
                     TransportType method = TransportType.airplane;
-                    Form modal = airplainSubject.getTransport(method);
+                    Form modal = airplainSubject.getTransport(method, null, null);
                     modal.Show();
                 }
                 else if (_selectedTransportation == "railroad")
