@@ -151,20 +151,12 @@ namespace TravelOpt
 
             if (errorMsg == "No Error")
             {
-                //TODO Start your Subject here!
-                
                 if (_selectedTransportation == "airport")
                 {
-                    Console.WriteLine("Implement airport");
-                    transportFactory airplainSubject = new transportFactory();
-                    TransportType method = TransportType.airplane;
-                    Form modal = airplainSubject.getTransport(method, null, null);
-                    modal.Show();
+                    new Receiver(_departureDate, _selectedAirport.Value, _maxPrice.ToString()).getTransport(_selectedTransportation);
                 }
                 else if (_selectedTransportation == "railroad")
                 {
-                    //ApiParser parse = new ApiParser(_departureDate, _selectedRailroad.Value, _maxPrice.ToString());
-                    //List<Train> trains = parse.getTrains();
                     new Receiver(_departureDate, _selectedRailroad.Value, _maxPrice.ToString()).getTransport(_selectedTransportation);
                 }
                 //else
