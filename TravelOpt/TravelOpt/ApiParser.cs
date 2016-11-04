@@ -19,6 +19,7 @@ namespace TravelOpt
         public const string _apiKey = "bnRwWHdSaSXJMLKtMljloLFf7f6oYlIo";
         public const string _apiVersion = "v1.2";
         public const string _apiMiscTrain = "/trains/schedule-search?";
+        private const string _apiMiscPlane = "/flights/inspiration-search?";
 
         public ApiParser()
         {
@@ -53,6 +54,36 @@ namespace TravelOpt
                 trains.Add(new Train(jToken["services"][i]["destination_station_id"].ToString(), jToken["services"][i]["departure_times"][0].ToString()));
             }
             return trains;
+        }
+
+        public List<Airplane> getPlanes(DateTime departureDay, DateTime returnDay, String origin, String maxPrice)
+        {
+            List<Airplane> planes = new List<Airplane>();
+            String duration = (departureDay.Day) + "--" + (returnDay.Day);
+            string apiUrl = _apiStart + _apiVersion + _apiMiscPlane + "origin=" + origin + "&departure_date=" + departureDay.ToString("yyyy-MM-dd") + "--" + returnDay.ToString("yyyy-MM-dd") + "&duration=" + duration + "&max_prcie=" + maxPrice + "&apikey=" + _apiKey;
+            Console.WriteLine(apiUrl);
+            WebClient client = new WebClient();
+            Stream stream = client.OpenRead(apiUrl);
+            StreamReader reader = new StreamReader(stream);
+            String content = reader.ReadToEnd();
+            JObject jo = getJsonObj(content);
+
+            if (jo["results"].Count() > 0)
+            {
+                planes = parsePlane(jo["results"][0]);
+            }
+            return planes;
+        }
+
+        private List<Airplane> parsePlane(JToken jToken)
+        {
+            List<Airplane> planes = new List<Airplane>();
+            for (int i = 0; i < jToken["services"].Count(); ++i)
+            {
+                //planes.Add(new Airplane(jToken["services"][i]["destination_station_id"].ToString(), jToken["services"][i]["departure_times"][0].ToString()));
+                Console.WriteLine("Durp yeaaaah");
+            }
+            return planes;
         }
 
         public JObject getJsonObj(String json)

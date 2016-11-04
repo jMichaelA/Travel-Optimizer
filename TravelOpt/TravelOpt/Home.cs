@@ -153,7 +153,7 @@ namespace TravelOpt
             {
                 if (_selectedTransportation == "airport")
                 {
-                    new Receiver(_departureDate, _selectedAirport.Value, _maxPrice.ToString()).getTransport(_selectedTransportation);
+                    new Receiver(_departureDate, _returnDate, _selectedAirport.Value, _maxPrice.ToString()).getTransport(_selectedTransportation);
                 }
                 else if (_selectedTransportation == "railroad")
                 {

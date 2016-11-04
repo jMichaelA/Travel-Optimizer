@@ -11,6 +11,7 @@ namespace TravelOpt
     public class Receiver
     {
         private DateTime _departureDate;
+        private DateTime _returnDate;
         private String _origin;
         private String _maxPrice;
 
@@ -21,13 +22,21 @@ namespace TravelOpt
             _maxPrice = maxPrice;
         }
 
+        public Receiver(DateTime departureDate, DateTime returnDate, String origin, String maxPrice)
+        {
+            _departureDate = departureDate;
+            _returnDate = returnDate;
+            _origin = origin;
+            _maxPrice = maxPrice;
+        }
+
         public void getTransport(String transport)
         {
             Train tempTrain = new Train();
             Airplane tempAirplane = new Airplane();
             ApiParser parse = new ApiParser();
             List<Train> trains = new List<Train> { };
-            List<Train> airplaneRes = new List<Train> { };
+            List<Airplane> airplanes = new List<Airplane> { };
 
             if (transport == "railroad")
             {
@@ -39,9 +48,14 @@ namespace TravelOpt
                // TrainUI trainSubject = new TrainUI(trains);
                //trainSubject.Show();
             }
-            else if(transport == "airplane")
+            else if(transport == "airport")
             {
                 Console.WriteLine("Implement airport in Receiver");
+                airplanes = parse.getPlanes(_departureDate, _returnDate, _origin, _maxPrice);
+                transportFactory planeSubject = new transportFactory();
+                TransportType method = TransportType.airplane;
+                Form modal = planeSubject.getTransport(method, null, airplanes);
+                modal.Show();
             }
         }
     }
