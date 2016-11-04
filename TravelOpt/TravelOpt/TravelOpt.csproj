@@ -55,6 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Airplane.cs" />
+    <Compile Include="AirplaneUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AirplaneUI.Designer.cs">
+      <DependentUpon>AirplaneUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="ApiParser.cs" />
     <Compile Include="dbAbstract.cs" />
     <Compile Include="DbManip.cs" />
@@ -87,6 +93,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Train.cs" />
     <Compile Include="Transportation.cs" />
+    <EmbeddedResource Include="AirplaneUI.resx">
+      <DependentUpon>AirplaneUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
