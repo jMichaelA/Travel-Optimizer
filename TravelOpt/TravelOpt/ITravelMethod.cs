@@ -100,6 +100,7 @@ namespace TravelFactory
             this.Load += new System.EventHandler(this.AirplaneUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+        }
     }
                 
     public partial class TrainUI : System.Windows.Forms.Form, ITravelMethod
