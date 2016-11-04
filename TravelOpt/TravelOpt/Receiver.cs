@@ -55,7 +55,14 @@ namespace TravelOpt
                 transportFactory planeSubject = new transportFactory();
                 TransportType method = TransportType.airplane;
                 Form modal = planeSubject.getTransport(method, null, airplanes);
-                modal.Show();
+                //if (airplanes.Count >= 1)
+                //{
+                    modal.Show();
+                //}
+                //else
+                //{
+                //    MessageBox.Show("There were no results for your specified search!");
+                //}
             }
         }
     }

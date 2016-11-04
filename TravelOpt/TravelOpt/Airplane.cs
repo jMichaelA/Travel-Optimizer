@@ -31,6 +31,16 @@ namespace TravelOpt
             _maxPrice = maxPrice;
         }
 
+        public Airplane(int cost, string destination, string origin, string departureDay, string returnDay)
+        {
+            Cost = cost;
+            Destination = destination;
+            Origin = origin;
+            DepartureDay = departureDay;
+            ReturnDay = returnDay;
+            _duration = "";
+        }
+
         public String apiComTest()
         {
             DepartureDay = "2016-11-06";

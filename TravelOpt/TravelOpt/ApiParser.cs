@@ -71,7 +71,7 @@ namespace TravelOpt
                 JObject jo = getJsonObj(content);
                 if (jo["results"].Count() > 0)
                 {
-                    planes = parsePlane(jo["results"]);
+                    planes = parsePlane(jo["results"], origin);
                 }
             }
             catch
@@ -81,11 +81,12 @@ namespace TravelOpt
             return planes;
         }
 
-        private List<Airplane> parsePlane(JToken jToken)
+        private List<Airplane> parsePlane(JToken jToken, String origin)
         {
             List<Airplane> planes = new List<Airplane>();
-            for (int i = 0; i < jToken["services"].Count(); ++i)
+            for (int i = 0; i < jToken.Count(); ++i)
             {
+                planes.Add(new Airplane((int) jToken[i]["price"], jToken[i]["destination"].ToString(), origin, jToken[i]["departure_date"].ToString(), jToken[i]["return_date"].ToString()));
                 //planes.Add(new Airplane(jToken["services"][i]["destination_station_id"].ToString(), jToken["services"][i]["departure_times"][0].ToString()));
                 Console.WriteLine("Durp yeaaaah");
             }
