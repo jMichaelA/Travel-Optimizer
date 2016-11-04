@@ -59,18 +59,24 @@ namespace TravelOpt
         public List<Airplane> getPlanes(DateTime departureDay, DateTime returnDay, String origin, String maxPrice)
         {
             List<Airplane> planes = new List<Airplane>();
-            String duration = (departureDay.Day) + "--" + (returnDay.Day);
+            String duration = (returnDay.DayOfYear - departureDay.DayOfYear) + "--" + (returnDay.DayOfYear - departureDay.DayOfYear + 3);
             string apiUrl = _apiStart + _apiVersion + _apiMiscPlane + "origin=" + origin + "&departure_date=" + departureDay.ToString("yyyy-MM-dd") + "--" + returnDay.ToString("yyyy-MM-dd") + "&duration=" + duration + "&max_prcie=" + maxPrice + "&apikey=" + _apiKey;
             Console.WriteLine(apiUrl);
             WebClient client = new WebClient();
-            Stream stream = client.OpenRead(apiUrl);
-            StreamReader reader = new StreamReader(stream);
-            String content = reader.ReadToEnd();
-            JObject jo = getJsonObj(content);
-
-            if (jo["results"].Count() > 0)
+            try
             {
-                planes = parsePlane(jo["results"][0]);
+                Stream stream = client.OpenRead(apiUrl);
+                StreamReader reader = new StreamReader(stream);
+                String content = reader.ReadToEnd();
+                JObject jo = getJsonObj(content);
+                if (jo["results"].Count() > 0)
+                {
+                    planes = parsePlane(jo["results"]);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("No results");
             }
             return planes;
         }
