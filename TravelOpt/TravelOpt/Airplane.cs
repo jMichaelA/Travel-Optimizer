@@ -14,6 +14,12 @@ namespace TravelOpt
         private string _duration;
         private string _maxPrice;
 
+        public Airplane()
+        {
+            _duration = "";
+            _maxPrice = "";
+        }
+
         public Airplane(int cost, string destination, string origin, string departureDay, string returnDay, string maxPrice)
         {
             Cost = cost;

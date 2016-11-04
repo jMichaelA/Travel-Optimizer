@@ -159,10 +159,9 @@ namespace TravelOpt
                 }
                 else if (_selectedTransportation == "railroad")
                 {
-                    ApiParser parse = new ApiParser(_departureDate, _selectedRailroad.Value, _maxPrice.ToString());
-                    List<Train> trains = parse.getTrains();
-                    TrainUI trainSubject = new TrainUI(trains);
-                    trainSubject.Show();
+                    //ApiParser parse = new ApiParser(_departureDate, _selectedRailroad.Value, _maxPrice.ToString());
+                    //List<Train> trains = parse.getTrains();
+                    new Receiver(_departureDate, _selectedRailroad.Value, _maxPrice.ToString()).getTransport(_selectedTransportation);
                 }
                 //else
                 //{

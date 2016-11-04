@@ -12,27 +12,25 @@ namespace TravelOpt
 {
     public class ApiParser
     {
-        private DateTime _departureDay;
-        private String _origin;
-        private String _maxPrice;
+        //private DateTime _departureDay;
+        //private String _origin;
+        //private String _maxPrice;
         public const string _apiStart = "http://api.sandbox.amadeus.com/";
         public const string _apiKey = "bnRwWHdSaSXJMLKtMljloLFf7f6oYlIo";
         public const string _apiVersion = "v1.2";
         public const string _apiMiscTrain = "/trains/schedule-search?";
 
-        public ApiParser(DateTime departureDay, String origin, String maxPrice)
+        public ApiParser()
         {
-            _departureDay = departureDay;
-            _origin = origin;
-            _maxPrice = maxPrice;
+            //_departureDay = departureDay;
+            //_origin = origin;
+            //_maxPrice = maxPrice;
         }
 
-        public List<Train> getTrains()
+        public List<Train> getTrains(DateTime departureDay, String origin, String maxPrice)
         {
             List<Train> trains = new List<Train>();
-
-            Console.WriteLine(_origin);
-            string apiUrl = _apiStart + _apiVersion + _apiMiscTrain + "origin=" + _origin + "&departure_date=" + _departureDay.ToString("yyyy-MM-dd") + "&apikey=" + _apiKey;
+            string apiUrl = _apiStart + _apiVersion + _apiMiscTrain + "origin=" + origin + "&departure_date=" + departureDay.ToString("yyyy-MM-dd") + "&apikey=" + _apiKey;
             Console.WriteLine(apiUrl);
             WebClient client = new WebClient();
             Stream stream = client.OpenRead(apiUrl);

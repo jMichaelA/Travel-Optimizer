@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="IDatabaseBehavior.cs" />
     <Compile Include="pg_data.cs" />
+    <Compile Include="Receiver.cs" />
     <Compile Include="TrainUI.cs">
       <SubType>Form</SubType>
     </Compile>

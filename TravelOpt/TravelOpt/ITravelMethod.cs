@@ -8,7 +8,6 @@ namespace TravelFactory
     {
         String getMethod();
         void getLocations();
-        void convertSymbolToLocation();
     }
 
     public enum TransportType
@@ -28,12 +27,8 @@ namespace TravelFactory
         {
             
         }
-        public void convertSymbolToLocation()
-        {
-
-        }
     }
-
+                
     public partial class TrainUI : System.Windows.Forms.Form, ITravelMethod
     {
         private List<String> _locations = new List<String> { };
@@ -63,10 +58,6 @@ namespace TravelFactory
                 }
             }
         }
-        public void convertSymbolToLocation()
-        {
-
-        }
         public void addLocationsToList()
         {
             foreach (var train in _trains)
@@ -75,7 +66,6 @@ namespace TravelFactory
                 {
                     this.destinationList.Items.Add(train.Destination);
                     this.timesListBox.Items.Add(train.ChildDepartureDay);
-                    Console.WriteLine("\n\n gasp");
                 }
             }
         }

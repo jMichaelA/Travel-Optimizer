@@ -17,6 +17,11 @@ namespace TravelOpt
         //public DateTime ChildDepartureDay { get { return DepartureDay; } set { DepartureDay = value; } }
         public String ChildDepartureDay;
 
+        public Train()
+        {
+            _destination = "";
+            ChildDepartureDay = "";
+        }
 
         public Train(String destinationSymbol, String departureTimes)
         {
