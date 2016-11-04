@@ -1,46 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using TravelOpt;
-
-namespace TravelFactory
+﻿namespace TravelOpt
 {
-    public interface ITravelMethod
+    partial class AirplaneUI
     {
-        String getMethod();
-        void getLocations();
-    }
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-    public enum TransportType
-    {
-        airplane,
-        train
-    }
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-    public partial class AirplaneUI : System.Windows.Forms.Form, ITravelMethod
-    {
-        private List<String> _locations = new List<String> { };
-        private List<String> _departureTimes = new List<String> { };
-        private List<Train> _planes;
-        private System.Windows.Forms.ListBox destinationList;
-        private System.Windows.Forms.ListBox timesListBox;
-        private System.Windows.Forms.Label destinationLabel;
-        private System.Windows.Forms.Label departureLabel;
-        public AirplaneUI()
-        {
-            InitializeComponent();
-        }
-        public String getMethod()
-        {
-            return "Airplane";
-        }
-        public void getLocations()
-        {
-            
-        }
-        private void AirplaneUI_Load(object sender, EventArgs e)
-        {
+        #region Windows Form Designer generated code
 
-        }
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
             this.destinationList = new System.Windows.Forms.ListBox();
@@ -100,63 +85,14 @@ namespace TravelFactory
             this.Load += new System.EventHandler(this.AirplaneUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-    }
-                
-    public partial class TrainUI : System.Windows.Forms.Form, ITravelMethod
-    {
-        private List<String> _locations = new List<String> { };
-        private List<String> _departureTimes = new List<String> { };
-        private List<Train> _trains;
 
-        public TrainUI(List<Train> trains)
-        {
-            InitializeComponent();
-            _trains = trains;
-            getLocations();
-            addLocationsToList();
         }
 
-        public String getMethod()
-        {
-            return "Train *CHOO CHOO*";
-        }
-        public void getLocations()
-        {
-            foreach (var train in _trains)
-            {
-                if(train.Destination != "")
-                {
-                    _locations.Add(train.Destination);
-                    _departureTimes.Add(train.ChildDepartureDay);
-                }
-            }
-        }
-        public void addLocationsToList()
-        {
-            foreach (var train in _trains)
-            {
-                if(train.Destination != "")
-                {
-                    this.destinationList.Items.Add(train.Destination);
-                    this.timesListBox.Items.Add(train.ChildDepartureDay);
-                }
-            }
-        }
-    }
+        #endregion
 
-    public class transportFactory
-    {
-        public System.Windows.Forms.Form getTransport(TransportType type)
-        {
-            switch (type)
-            {
-                case TransportType.airplane:
-                    return new AirplaneUI();
-                case TransportType.train:
-                    return new TrainUI();
-                default:
-                    throw new NotSupportedException();
-            }
-        }
+        private System.Windows.Forms.ListBox destinationList;
+        private System.Windows.Forms.ListBox timesListBox;
+        private System.Windows.Forms.Label destinationLabel;
+        private System.Windows.Forms.Label departureLabel;
     }
 }
