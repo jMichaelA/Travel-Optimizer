@@ -96,7 +96,6 @@ namespace TravelOpt
             for (int i = 0; i < jToken.Count(); ++i)
             {
                 planes.Add(new Airplane((double) jToken[i]["price"], jToken[i]["destination"].ToString(), origin, jToken[i]["departure_date"].ToString(), jToken[i]["return_date"].ToString()));
-                Console.WriteLine("==================== SUCCESSFUL INSERT! ====================");
             }
             return planes;
         }
