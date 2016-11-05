@@ -31,7 +31,7 @@ namespace TravelOpt
             _maxPrice = maxPrice;
         }
 
-        public Airplane(int cost, string destination, string origin, string departureDay, string returnDay)
+        public Airplane(double cost, string destination, string origin, string departureDay, string returnDay)
         {
             Cost = cost;
             Destination = destination;

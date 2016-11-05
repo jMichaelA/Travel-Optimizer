@@ -8,7 +8,7 @@ namespace TravelOpt
 {
     public class Transportation
     {
-        private int? _price;
+        private double? _price;
         private string _destination;
         private string _origin;
         public const string _apiStart = "http://api.sandbox.amadeus.com/";
@@ -17,7 +17,7 @@ namespace TravelOpt
         private string _departureDay;
         private string _returnDay;
 
-        public int? Cost { get { return _price; } set { _price = value; } }
+        public double? Cost { get { return _price; } set { _price = value; } }
         public string Destination { get { return _destination; } set { _destination = value; } }
         public string Origin { get { return _origin; } set { _origin = value; } }
         public string DepartureDay { get { return _departureDay; } set { _departureDay = value; } }
