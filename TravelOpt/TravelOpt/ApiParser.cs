@@ -63,17 +63,30 @@ namespace TravelOpt
             string apiUrl = _apiStart + _apiVersion + _apiMiscPlane + "origin=" + origin + "&departure_date=" + departureDay.ToString("yyyy-MM-dd") + "--" + returnDay.ToString("yyyy-MM-dd") + "&duration=" + duration + "&max_prcie=" + maxPrice + "&apikey=" + _apiKey;
             Console.WriteLine(apiUrl);
             WebClient client = new WebClient();
-            //JObject jo = new JObject();
-            //jo["results"] = "";
-            Stream stream = client.OpenRead(apiUrl);
-            StreamReader reader = new StreamReader(stream);
-            String content = reader.ReadToEnd();
-            JObject jo = getJsonObj(content);
-
-            if (jo["results"].Count() > 0)
+            
+            try
             {
-                planes = parsePlane(jo["results"], origin);
+                HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+
+                // Get the associated response for the above request.
+                HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
+                myHttpWebResponse.Close();
+                Stream stream = client.OpenRead(apiUrl);
+                StreamReader reader = new StreamReader(stream);
+                string content = reader.ReadToEnd();
+                JObject jo = getJsonObj(content);
+
+                if (jo["results"].Count() > 0)
+                {
+                    planes = parsePlane(jo["results"], origin);
+                }
             }
+            catch (WebException e)
+            {
+                Console.WriteLine("web exception " + e.Message);
+                return planes;
+            }
+                        
             return planes;
         }
 
@@ -82,14 +95,7 @@ namespace TravelOpt
             List<Airplane> planes = new List<Airplane>();
             for (int i = 0; i < jToken.Count(); ++i)
             {
-                try
-                {
-                    planes.Add(new Airplane((int)jToken[i]["price"], jToken[i]["destination"].ToString(), origin, jToken[i]["departure_date"].ToString(), jToken[i]["return_date"].ToString()));
-                }
-                catch (Exception exp)
-                {
-                    Console.WriteLine("The error is: " + exp);
-                }
+                planes.Add(new Airplane((int)jToken[i]["price"], jToken[i]["destination"].ToString(), origin, jToken[i]["departure_date"].ToString(), jToken[i]["return_date"].ToString()));
             }
             return planes;
         }
