@@ -50,7 +50,6 @@ namespace TravelOpt
             }
             else if(transport == "airport")
             {
-                Console.WriteLine("Implement airport in Receiver");
                 airplanes = parse.getPlanes(_departureDate, _returnDate, _origin, _maxPrice);
                 transportFactory planeSubject = new transportFactory();
                 TransportType method = TransportType.airplane;

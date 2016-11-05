@@ -8,6 +8,7 @@ namespace TravelFactory
     {
         String getMethod();
         void getLocations();
+        void addLocationsToList();
     }
 
     public enum TransportType
@@ -20,7 +21,7 @@ namespace TravelFactory
     {
         private List<String> _locations = new List<String> { };
         private List<String> _departureTimes = new List<String> { };
-        private List<Train> _planes;
+        private List<Airplane> _planes = new List<Airplane> { };
         private System.Windows.Forms.ListBox destinationList;
         private System.Windows.Forms.ListBox timesListBox;
         private System.Windows.Forms.Label destinationLabel;
@@ -29,14 +30,44 @@ namespace TravelFactory
         {
             InitializeComponent();
         }
+
+        public AirplaneUI(List<Airplane> planes)
+        {
+            InitializeComponent();
+            _planes = planes;
+            getLocations();
+            addLocationsToList();
+        }
+
+        public void getLocations()
+        {
+            foreach (var plane in _planes)
+            {
+                if (plane.Destination != "")
+                {
+                    _locations.Add(plane.Destination);
+                    _departureTimes.Add(plane.DepartureDay);
+                }
+            }
+        }
+
+        public void addLocationsToList()
+        {
+            foreach (var plane in _planes)
+            {
+                if (plane.Destination != "")
+                {
+                    this.destinationList.Items.Add(plane.Destination);
+                    this.timesListBox.Items.Add(plane.DepartureDay);
+                }
+            }
+        }
+
         public String getMethod()
         {
             return "Airplane";
         }
-        public void getLocations()
-        {
-            
-        }
+        
         private void AirplaneUI_Load(object sender, EventArgs e)
         {
 
@@ -152,7 +183,7 @@ namespace TravelFactory
             switch (type)
             {
                 case TransportType.airplane:
-                    return new AirplaneUI();
+                    return new AirplaneUI(airplanes);
                 case TransportType.train:
                     return new TrainUI(trains);
                 default:
